@@ -10,14 +10,31 @@
 class ResizeSettings
 {
 public:
+    //Shared with resize
     ResizeSettings();
     ~ResizeSettings();
-    void magickSetup(const QString& mpath, const QString& margs);
+    void magickSetup(const QString& defaultMagickpath, const QString& defaultArgs, const QString& defaultOutputfolder);
+
+    //Specific to the UI
+    void iconsSetup(const QString& ipath);
+    void simultaneousSetup(const bool state);
+    void toggleSimultaneous();
+    void saveSettings(const QMap<QString, QString>& newsettings);
+
+    //Settings shared with resize
+    QString ipaddress;
+    quint16 port = DEFAULT_PORT;
 
     QString magickpath;
     QString args;
-    QString ipaddress;
-    quint16 port = DEFAULT_PORT;
+    bool outputfolderon;
+    QString outputfolder;
+
+    //Settings specific to the UI
+    bool simultaneous;
+    QString iconspath;
+	int iconssize;
+
 private:
     QSettings* s;
 };

@@ -11,17 +11,19 @@ class TcpClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit TcpClient(QObject *parent = 0);
+    explicit TcpClient(QObject *parent = nullptr);
     ~TcpClient();
 
     void doSend(const QString &hostIP, quint16 port, const QString &msg);
 
 signals:
+    //void finished();
 
 public slots:
     void connectedSuccess();
     void disconnected();
     void bytesWritten(qint64 bytes);
+    void errorDetected();
     //void readyRead();
 
 private:
@@ -39,9 +41,11 @@ public:
     ~TcpServer();
 
     void startServer(const QString &ipConnect, quint16 port);
+    void restartServer(const QString &ipConnect, quint16 port);
 
 signals:
     void receivedSocket(const QString &line);
+    void serverFailStart();
 
 public slots:
     void newConnection();

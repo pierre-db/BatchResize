@@ -12,12 +12,16 @@ class ResizeSettings
 public:
     ResizeSettings();
     ~ResizeSettings();
-    void magickSetup(const QString& mpath, const QString& margs);
+    void magickSetup(const QString& defaultMagickpath, const QString& defaultArgs, const QString& defaultOutputfolder);
+
+    QString ipaddress;
+    quint16 port = DEFAULT_PORT;
 
     QString magickpath;
     QString args;
-    QString ipaddress;
-    quint16 port = DEFAULT_PORT;
+
+    bool outputfolderon;
+    QString outputfolder;
 private:
     QSettings* s;
 };

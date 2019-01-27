@@ -4,6 +4,7 @@
 #
 #-------------------------------------------------
 
+#Remove widgets ?
 QT       += core widgets
 QT       += network
 
@@ -17,8 +18,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     socket.cpp \
-    resizesettings.cpp
+    resizesettings.cpp \
+	mainapplication.cpp
 
 HEADERS += \
     socket.h \
-    resizesettings.h
+    resizesettings.h \
+	mainapplication.h

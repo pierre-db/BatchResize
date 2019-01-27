@@ -27,12 +27,17 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     socket.cpp \
-    resizesettings.cpp
+    resizesettings.cpp \
+    actions.cpp \
+    settingsdialog.cpp \
+	model.cpp
 
 HEADERS += \
         mainwindow.h \
     socket.h \
-    resizesettings.h
+    resizesettings.h \
+    settingsdialog.h \
+	model.h
 
 FORMS += \
         mainwindow.ui
@@ -44,3 +49,6 @@ win32:RC_ICONS += icon.ico
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

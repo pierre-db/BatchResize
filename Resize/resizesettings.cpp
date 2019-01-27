@@ -19,16 +19,23 @@ ResizeSettings::ResizeSettings()
          port = (quint16)s->value("port").toInt();
 }
 
-void ResizeSettings::magickSetup(const QString& mpath, const QString& margs)
+void ResizeSettings::magickSetup(const QString& defaultMagickpath, const QString& defaultArgs, const QString& defaultOutputfolder)
 {
     if(!s->contains("magickpath"))
-        s->setValue("magickpath", mpath);
+        s->setValue("magickpath", defaultMagickpath);
     if(!s->contains("args"))
-        s->setValue("args", margs);
+        s->setValue("args", defaultArgs);
 
-    magickpath = s->value("magickpath").toString();
-    args = s->value("args").toString();
+    if(!s->contains("outputfolderon"))
+        s->setValue("outputfolderon", false);
+    if(!s->contains("outputfolder"))
+        s->setValue("outputfolder", defaultOutputfolder);
 
+    magickpath = s->value("magickpath").toString().trimmed();
+    args = s->value("args").toString().simplified();
+
+    outputfolder = s->value("outputfolder").toString().trimmed();
+    outputfolderon = s->value("outputfolderon").toBool();
 }
 
 ResizeSettings::~ResizeSettings()

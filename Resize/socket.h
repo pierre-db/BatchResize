@@ -13,17 +13,19 @@ class TcpClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit TcpClient(QObject *parent = 0);
+    explicit TcpClient(QObject *parent = nullptr);
     ~TcpClient();
 
     void doSend(const QString &hostIP, quint16 port, const QString &msg);
 
 signals:
+    //void finished();
 
 public slots:
     void connectedSuccess();
     void disconnected();
     void bytesWritten(qint64 bytes);
+    void errorDetected();
     //void readyRead();
 
 private:

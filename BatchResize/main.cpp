@@ -1,43 +1,46 @@
 ﻿#include "mainwindow.h"
-#include "socket.h"
-#include <QApplication>
+
+
+QString command(const int argc, char *argv[])
+{
+    QString file;
+    QString force = "";
+    int filePos = 1;
+
+    if(strcmp(argv[1], "-force") == 0)
+    {
+        force = "::" + QString(strcat(argv[2], "\0"));
+        filePos = 3;
+    }
+    else if(strcmp(argv[1], "-help") == 0)
+    {
+        std::cout << "Usage: BatchResize [-force \"arg1 arg2 ...\"] /path/to/file.jpg" << std::endl;
+    }
+
+    if(filePos < argc)
+    {
+        file = QDir::toNativeSeparators(strcat(argv[filePos], "\0"));
+
+        //We signal to the main instance that file needs to be processed
+        return "run::" + file + force;
+    }
+    else
+        std::cout << "Error: invalid arguments" << std::endl;
+
+    return "";
+}
 
 int main(int argc, char *argv[])
 {
-    bool serveron = false;
-    QString pathlock = QDir::tempPath() + LOCKFILE;
+    //QUuid uuid = QUuid::createUuid();
+    QString pathlock = QDir::temp().absoluteFilePath(LOCKFILE);
+    QLockFile lockfile(pathlock);
 
-    if(argc > 1)
-    {
-        //If the lock file already exists: the server is on
-        if (QFileInfo::exists(pathlock))
-             serveron = true;
-
-        if(serveron)
-        {//Server on: we just sent the argv to the server
-         // std::cout << "Server on" << std::endl;
-            ResizeSettings settings;
-            TcpClient client(nullptr);
-            QString file = QDir::toNativeSeparators(strcat(argv[1], "\0"));
-
-            //We signal to the main instance that file needs to be processed
-            client.doSend(settings.ipaddress, settings.port, "run::" + file);
-
-            return 0;
-        }
-    }
-
-    if(!serveron)
+    //If the lock file already exists: the server is on
+    if(lockfile.tryLock(100))
     {//No server on yet, we launch it
-        //We create a lock file to define wether an instance of the program is already running
-       QFile lockfile(pathlock);
-       if(lockfile.open(QIODevice::WriteOnly))
-       {
-            std::cout << "Created " << pathlock.toStdString() << std::endl;
-            lockfile.close();
-       }
-       else
-           std::cerr << "Failed to create " << pathlock.toStdString() << std::endl;
+
+        std::cout << "Created " << pathlock.toStdString() << std::endl;
 
         //We launch the main application
         QApplication a(argc, argv);
@@ -47,10 +50,28 @@ int main(int argc, char *argv[])
         //We launch the command on the file passed in argument if any
         if(argc > 1)
         {
-            QString file = QDir::toNativeSeparators(strcat(argv[1], "\0"));
-            w.launchCmd("run::" + file);
+            QString cmd = command(argc, argv);
+            if(cmd != "")
+                w.launchCmd(cmd);
         }
 
         return a.exec();
+    }
+    else
+    {//Server on: we just sent the argv to the server
+     // std::cout << "Server on" << std::endl;
+        if(argc > 1)
+        {
+            ResizeSettings settings;
+            TcpClient client(nullptr);
+
+            QString cmd = command(argc, argv);
+
+            //We signal to the main instance that file needs to be processed
+            if(cmd != "")
+                client.doSend(settings.ipaddress, settings.port, cmd);
+
+        }
+        return 0;
     }
 }

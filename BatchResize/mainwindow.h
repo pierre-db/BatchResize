@@ -1,16 +1,34 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define ICON_WAIT_PATH "/icons/wait.png"
-#define ICON_SUCC_PATH "/icons/success.png"
-#define ICON_ERR_PATH "/icons/error.png"
-#define RESIZE_PATH "/resize.exe"
-#define CMD_PATH "/magick.exe"
-#define LOCKFILE "/batchresize.lock"
+#define ICON_SELECT_PATH "/open.png"
+#define ICON_OPEN_PATH "/openfile.png"
+#define ICON_OPENF_PATH "/openfolder.png"
+#define ICON_MAGICK_PATH "/runmagick.png"
+#define ICON_CLR_PATH "/clear.png"
+#define ICON_DEL_PATH "/delete.png"
+#define ICON_INFO_PATH "/info.png"
+#define ICON_SIM_PATH "/simultaneous.png"
+#define ICON_PAUSE_PATH "/pause.png"
+#define ICON_SETTINGS_PATH "/settings.png"
+
+#define RESIZE_PATH "/resize"
+#define CMD_PATH "/magick"
+
+#define LOCKFILE "3e6291c3-671f-488b-9c59-b6774002479e.lockfile"
+
+#define OPENDIALOG_FILE_TYPE "Image (*.jpg *.jpeg *.png *.gif *.bmp *.tiff)"
+#define LIST_ACCEPTED_FORMATS {"jpg", "jpeg", "png", "gif", "bmp", "tiff"}
+#define LIST_NAME_FILTERS {"*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp", "*.tiff"}
+
+#define DATA_ID Qt::UserRole + 1
+#define DATA_STATUS Qt::UserRole + 2
 
 #include "socket.h"
 #include "resizesettings.h"
+#include "model.h"
 
+#include <QApplication>
 #include <QMainWindow>
 #include <QtWidgets>
 
@@ -20,8 +38,7 @@
 #include <QDir>
 #include <QMimeData>
 
-
-bool fexists (const std::string& name);
+#define BUILD_VERSION "20190127"
 
 namespace Ui {
 class MainWindow;
@@ -34,32 +51,56 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void initvars();
+    void initVars();
+    void initActions();
+
+    ResizeSettings settings;
 
 protected:
+	void doResizeOnRow(const int rowNb, const QString& argument = "");
+    void runCmdDir(const QString& argument, const QString& force = "");
+	
     void dragEnterEvent(QDragEnterEvent *evt);
     void dropEvent(QDropEvent* evt);
 
-public slots:
-     void launchCmd(const QString &str);
+    // Methods associated to QActions:
+    QString selectedItemFileOut();
+    QModelIndex selectedItemIndex();
+    void reloadIconsActions(const QString& iconspath);
 
-private slots:
-     void on_pushButton_clicked();
+public slots:
+     void launchCmd(const QString &cmd);
+
+     void serverFailed();
+
+     //Right click action menu:
+     void ShowContextMenu(const QPoint& pos);
+
+     // Methods associated to QActions:
+     void openFiles();
+     void openSelectedItem();
+     void openSelectedFolder();
+     void rerunSelectedItem();
+     void removeSelectedItem();
+     void clearList();
+     void checkInfo();
+     void toggleSimultaneousMode();
+     void togglePause();
+     void openSettings();
+     void reloadSettings(const QMap<QString, QString>& newsettings);
 
 private:
-    QStandardItemModel *model;
     Ui::MainWindow *ui;
+    CustomItemModel *model;
+    bool pause;
 
     TcpServer *server;
 
-    QString pathlock;
     QString pathexec;
     QString pathresize;
-
-    QIcon iconsucc;
-    QIcon iconwait;
-    QIcon iconerr;
-
-    ResizeSettings settings;
+    
+    QList<QAction *> actionsList;
+    QList<QAction *> actionsMenuList;
+    QMenu listContextualMenu;
 };
 #endif // MAINWINDOW_H

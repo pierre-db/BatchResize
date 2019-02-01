@@ -4,4 +4,4 @@ BatchResize (formerly or Quick Batch Resize or QBatch Resize) is a front end for
 
 ## Binaries
 
-You can go into the distibution directory to download the x86_64 Linux AppImage. You will need to install the dependencies Qt 5 and Image Magick.
+You can go to the [Sourceforge](https://sourceforge.net/projects/batchresize/files/) page and grab the latest bineries for your plateform. On linux you may need to install the dependencies qt5 and magick.

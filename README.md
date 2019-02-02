@@ -31,14 +31,16 @@ Then make the makefile:
 Let's tidy up a bit and move the executable file somewhere else:
 
 `rm *.o`
+
 `rm moc_*`
+
 `mv ./Resize ../bin/resize`
 
 3. Now let's compile BatchResize with the same commands:
 
 `cd /path/to/BatchResize/BatchResize`
 `qmake "CONFIG+=release" ./BatchResize.pro`
-`make all ./Makefile
+`make all ./Makefile`
 `rm *.o`
 `rm moc_*`
 `mv ./BatchResize ../bin/BatchResize`

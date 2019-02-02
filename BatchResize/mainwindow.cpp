@@ -49,7 +49,7 @@ void MainWindow::initVars()
 	
 	//We read the ini file and set it up by adding any missing data
     settings.magickSetup(pathexec + CMD_PATH, "", QDir::homePath());
-    settings.iconsSetup(pathexec + "/icons");	    
+    settings.iconsSetup(pathexec + "/icons/Breeze");
     settings.simultaneousSetup(false);
     pause = false;
 	

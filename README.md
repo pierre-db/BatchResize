@@ -1,6 +1,8 @@
 # BatchResize
 
 BatchResize (formerly or Quick Batch Resize or QBatch Resize) is a front end for Image Magick to resize images as fast as possible with no overheads. It is coded in C++ using the Qt library and is distributed under GPL v3.0 license.
+BatchResize is a front end for [Image Magick](https://www.imagemagick.org/) to process images in batch. BatchResize is ditributed with icons packs taken from [Breeze icons](http://https://github.com/KDE/breeze-icons), [Tango icons](https://github.com/Distrotech/tango-icon-theme) and [Faenza icons](https://github.com/shlinux/faenza-icon-theme).
+For more information on how to use the software and to download the binaries you can jump to the project's page on [Sourceforge](https://sourceforge.net/p/batchresize/wiki/Documentation/).
 
 ## Build
 
@@ -8,12 +10,9 @@ Here are the instructions to compile the project on Linux. You will need the qt5
 
 1. First you need to download the sources. I won't go in to the details of this step and let you decide your favorite way of doing this.
 
-Let's assume you have the *Resize* and *BatchResize* directories in a folder named */path/to/BatchResize*.
-We're going to create a new folder *bin* to put the binaries into once the compilation is done:
+Let's assume you have the *Resize* and *BatchResize* directories in a folder named */path/to/BatchResize*. You can go into this folder:
 
 `cd /path/to/BatchResize`
-
-`mkdir ./bin`
 
 2. Once downloaded we are goind to build the project file Resize.pro.
 
@@ -29,13 +28,13 @@ Then make the makefile:
 
 `make all ./Makefile`
 
-Let's tidy up a bit and move the executable file somewhere else:
+Let's tidy up a bit and move the executable file into the root of our work folder:
 
 `rm *.o`
 
 `rm moc_*`
 
-`mv ./Resize ../bin/resize`
+`mv ./Resize ../resize`
 
 3. Now let's compile BatchResize with the same commands:
 
@@ -49,11 +48,15 @@ Let's tidy up a bit and move the executable file somewhere else:
 
 `rm moc_*`
 
-`mv ./BatchResize ../bin/BatchResize`
+`mv ./BatchResize ../BatchResize`
 
 4. You should be all set! The last step is to launch BatchResize:
 
-`/path/to/BatchResize/bin/BatchResize`
+`/path/to/BatchResize/BatchResize`
+
+Note that the first time you run BatchResize it will automatically generate a configuration file into your home directory.
+By default the program will look for the icons displayed in the program in a directory called *icons* located in the same folder as the executable file.
+If the icons are located in another folder, you can reconfigure the icons location by going into the settings.
 
 ## Binaries
 

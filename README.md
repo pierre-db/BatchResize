@@ -3,7 +3,7 @@
 BatchResize is a front end for Image Magick to resize images as fast as possible with no overheads. It is coded in C++ using the Qt library and is distributed under GPL v3.0 license.
 
 BatchResize is a front end for [Image Magick](https://www.imagemagick.org/) to process images in batch. BatchResize is ditributed with icons packs taken from [Breeze icons](http://https://github.com/KDE/breeze-icons), [Tango icons](https://github.com/Distrotech/tango-icon-theme) and [Faenza icons](https://github.com/shlinux/faenza-icon-theme).
-For more information on how to use the software and to download the binaries you can jump to the project's page on [Sourceforge](https://sourceforge.net/p/batchresize/wiki/Documentation/).
+For more information on how to use the software and to download the binaries you can jump to the project's page on [Sourceforge](https://sourceforge.net/p/batchresize/wiki/home/).
 
 ## Build
 

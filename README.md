@@ -9,7 +9,11 @@ For more information on how to use the software and to download the binaries you
 
 Here are the instructions to compile the project on Linux. You will need the qt5-dev package installed.
 
-1. First you need to download the sources. I won't go in to the details of this step and let you decide your favorite way of doing this.
+1. First you need to download the sources.
+
+There are several ways of downloading the sources. If you have git installed you can do:
+
+`git clone https://gitlab.com/pierre-db/Qbatch-resize/`
 
 Let's assume you have the *Resize* and *BatchResize* directories in a folder named */path/to/BatchResize*. You can go into this folder:
 

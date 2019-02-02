@@ -12,6 +12,7 @@ Let's assume you have the *Resize* and *BatchResize* directories in a folder nam
 We're going to create a new folder *bin* to put the binaries into once the compilation is done:
 
 `cd /path/to/BatchResize`
+
 `mkdir ./bin`
 
 2. Once downloaded we are goind to build the project file Resize.pro.
@@ -39,10 +40,15 @@ Let's tidy up a bit and move the executable file somewhere else:
 3. Now let's compile BatchResize with the same commands:
 
 `cd /path/to/BatchResize/BatchResize`
+
 `qmake "CONFIG+=release" ./BatchResize.pro`
+
 `make all ./Makefile`
+
 `rm *.o`
+
 `rm moc_*`
+
 `mv ./BatchResize ../bin/BatchResize`
 
 4. You should be all set! The last step is to launch BatchResize:

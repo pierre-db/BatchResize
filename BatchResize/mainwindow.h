@@ -47,7 +47,7 @@
 #include <QDir>
 #include <QMimeData>
 
-#define BUILD_VERSION "20190127"
+#define BUILD_VERSION "202000329"
 
 namespace Ui {
 class MainWindow;

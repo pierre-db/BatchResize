@@ -17,9 +17,18 @@
 
 #define LOCKFILE "3e6291c3-671f-488b-9c59-b6774002479e.lockfile"
 
-#define OPENDIALOG_FILE_TYPE "Image (*.jpg *.jpeg *.png *.gif *.bmp *.tiff)"
-#define LIST_ACCEPTED_FORMATS {"jpg", "jpeg", "png", "gif", "bmp", "tiff"}
-#define LIST_NAME_FILTERS {"*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp", "*.tiff"}
+#define OPENDIALOG_FILE_TYPE "Image (*.jpg *.jpeg *.jpe *.jif *.jfif *.jfi"\
+                             " *.jp2 *.j2k *.jpf *.jpx *.jpm *.mj2"\
+                             " *.png *.gif *.webp *.heif *.heic"\
+                             " *.bmp *dib *.tiff *tif *.psd *.svg)"
+#define LIST_ACCEPTED_FORMATS {"jpg", "jpeg", "jpe", "jif", "jfif", "jfi",\
+                               "jp2", "j2k", "jpf", "jpx", "jpm", "mj2",\
+                               "png", "gif", "webp", "heif", "heic",\
+                               "bmp", "dib", "tiff", "tif", "psd", "svg"}
+#define LIST_NAME_FILTERS {"*.jpg", "*.jpeg", "*.jpe", "*.jif", "*.jfif", "*.jfi",\
+                           "*.jp2", "*.j2k", "*.jpf", "*.jpx", "*.jpm", "*.mj2",\
+                           "*.png", "*.gif","*.webp", "*.heif", "*.heic",\
+                           "*.bmp", "*.dib", "*.tiff", "*.tif", "*.psd", "*.svg"}
 
 #define DATA_ID Qt::UserRole + 1
 #define DATA_STATUS Qt::UserRole + 2
